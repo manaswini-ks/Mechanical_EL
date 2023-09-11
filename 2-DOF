@@ -1,0 +1,42 @@
+% Define the link lengths (in meters)
+L1 = 0.5;
+L2 = 0.3;
+
+% Define the joint angles (in degrees)
+theta1 = 90; % First joint angle
+theta2 = 30; % Second joint angle
+
+% Convert joint angles from degrees to radians
+theta1 = deg2rad(theta1);
+theta2 = deg2rad(theta2);
+
+% Calculate the end-effector position (x, y)
+x = L1 * cos(theta1) + L2 * cos(theta1 + theta2);
+y = L1 * sin(theta1) + L2 * sin(theta1 + theta2);
+
+% Define the coordinates of the joints
+joint1_x = 0;
+joint1_y = 0;
+joint2_x = L1 * cos(theta1);
+joint2_y = L1 * sin(theta1);
+end_effector_x = x;
+end_effector_y = y;
+
+% Plot the robotic arm
+figure;
+plot([joint1_x, joint2_x, end_effector_x], [joint1_y, joint2_y, end_effector_y], 'bo-', 'LineWidth', 2);
+axis equal; % Set the aspect ratio to be equal
+xlim([-0.2, 1]); % Adjust the x-axis limits if needed
+ylim([-0.2, 0.7]); % Adjust the y-axis limits if needed
+
+title('2-DOF Robotic Arm Forward Kinematics');
+xlabel('X Position (m)');
+ylabel('Y Position (m)');
+grid on;
+
+% Mark the joints and end-effector
+hold on;
+plot(joint1_x, joint1_y, 'ro', 'MarkerSize', 10);
+plot(joint2_x, joint2_y, 'ro', 'MarkerSize', 10);
+plot(end_effector_x, end_effector_y, 'go', 'MarkerSize', 10);
+hold off;
